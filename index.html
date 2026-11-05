@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Christmas card message writer: what to write for everyone on your list</title>
+<meta name="description" content="Free one-file Christmas card message writer. Add the people on your card list, pick who each one is and a warm, funny or short style, and get a different message for each. Edit, copy or print. Nothing saved or sent.">
+<style>
+:root{--red:#B91C1C;--green:#166534;--ink:#1F2937;--line:#D1D5DB;--bg:#FFFBEB}
+*{box-sizing:border-box}
+body{font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg);margin:0;padding:1rem}
+.w{max-width:48rem;margin:0 auto}
+h1{font-size:1.6rem;margin:.2rem 0 .4rem;color:var(--red)}
+.row{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:.8rem;margin:.8rem 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.6rem}
+label{display:block;font-weight:600;font-size:.9rem;margin-bottom:.15rem}
+input[type=text],select,textarea{font:inherit;border:1.5px solid var(--line);border-radius:8px;padding:.45rem .55rem;width:100%;background:#fff}
+textarea{min-height:5.2rem;margin-top:.5rem;resize:vertical}
+button{font:inherit;font-weight:700;background:var(--green);color:#fff;border:0;border-radius:8px;padding:.5rem .9rem;cursor:pointer}
+button.alt{background:#fff;color:var(--green);border:1.5px solid var(--green)}
+button.x{background:#fff;color:#6B7280;border:1.5px solid var(--line)}
+.bar{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0}
+.muted{color:#6B7280;font-size:.9rem}
+#sheet{display:none}
+#sheet h2{font-size:1.2rem}
+#sheet .item{border-bottom:1px solid var(--line);padding:.5rem 0;break-inside:avoid}
+#sheet .item b{display:block}
+@media print{body{background:#fff}.w>*:not(#sheet){display:none!important}#sheet{display:block!important}}
+</style>
+</head>
+<body>
+<div class="w">
+<h1>Christmas card message writer</h1>
+<p>Add everyone on your card list, say who each person is and the style you like, and get a different message for each. Change the wording, copy it, then write it out by hand. Print the whole list to work through with a pen. Nothing is saved or sent anywhere.</p>
+<div id="rows"></div>
+<div class="bar">
+ <button type="button" id="add">Add a person</button>
+ <button type="button" id="fill" class="alt">Write messages for everyone</button>
+ <button type="button" id="print" class="alt">Print my list</button>
+</div>
+<p class="muted" id="note"></p>
+<div id="sheet"></div>
+</div>
+<script>
+var G=[{"id": "family", "title": "Family (aunts, uncles, cousins, the whole lot)", "msgs": [["warm", "Wishing you all a Christmas full of laughter, good food and the people you love most. Thinking of you all and hoping the new year is a kind one."], ["warm", "Merry Christmas to all of you. Our family is better for having you in it, and we can't wait for the next time we are all in one room."], ["warm", "Sending lots of love this Christmas. May your house be warm, your table full and your year ahead full of good things."], ["funny", "Merry Christmas! May your sprouts be tender, your relatives be early to leave and the leftovers last until New Year."], ["funny", "Happy Christmas to the family. May nobody lose at charades and then take it personally, which is traditionally my job."], ["short", "Merry Christmas and all our love to you all."], ["short", "Happy Christmas, lovely family. See you soon."]]}, {"id": "parents", "title": "Mum and Dad", "msgs": [["warm", "Mum and Dad, thank you for everything you do, all year round. I hope you put your feet up this Christmas, because you have earned it. Love you both."], ["warm", "Merry Christmas, Mum and Dad. Whatever Christmas looks like now, the best bits are still the ones I learned from you. Love you lots."], ["warm", "To the two people who made Christmas feel like magic when I was little: thank you. I hope this one is full of tea, telly and cheese. All my love."], ["funny", "Merry Christmas, Mum and Dad. I promise to eat everything you put in front of me and to say 'oh, you shouldn't have' at least twice."], ["funny", "Happy Christmas to my parents, who still think I haven't noticed how much of the dinner is 'tasting'. Love you both."], ["short", "Merry Christmas, Mum and Dad. Love you lots."], ["short", "Happy Christmas to the best parents. Thank you for everything."]]}, {"id": "grandparents", "title": "Grandparents", "msgs": [["warm", "Merry Christmas, Nan and Grandad. Thank you for every story, every biscuit and every cuddle. We think of you all the time and love you very much."], ["warm", "Dear Grandma and Grandad, you make Christmas feel like Christmas. We hope it is a warm, cosy one, and we are counting the days until we see you."], ["warm", "Wishing the best grandparents in the world a very happy Christmas. Thank you for always having time for us. Lots of love and big hugs."], ["funny", "Merry Christmas! Please save us a seat by the fire and do not tell Mum how many mince pies we had last year."], ["funny", "Happy Christmas to the people who spoil us rotten and are not sorry about it. We would not change a thing."], ["short", "Merry Christmas, Nan and Grandad. Lots of love."], ["short", "Happy Christmas, with hugs and kisses from all of us."]]}, {"id": "partner", "title": "Husband, wife or partner", "msgs": [["warm", "Merry Christmas, my love. Another year with you and I still can't think of anyone I would rather share a sofa, a blanket and a bar of chocolate with."], ["warm", "Thank you for another year of making me laugh and making me feel at home. Every Christmas with you is my favourite one so far. I love you."], ["warm", "To the one I want next to me on Christmas morning and every other morning too: Merry Christmas. You are my favourite part of every year."], ["funny", "Merry Christmas! I promise to stop eating the chocolates off the tree as soon as there are none left."], ["funny", "Happy Christmas to the person I would happily share the last roast potato with. This is a huge compliment, as you know."], ["short", "Merry Christmas, my love. Always yours."], ["short", "Happy Christmas. You are my favourite person."]]}, {"id": "friend", "title": "A close friend", "msgs": [["warm", "Merry Christmas to a friend who has been there through the good bits and the not-so-good bits this year. I am so glad I know you. Let's make time for each other soon."], ["warm", "Thank you for being the kind of friend who makes everything better. I hope you have a lovely Christmas and a brilliant new year."], ["warm", "Wishing you a Christmas full of everything you love. You deserve a good one, and I can't wait to hear all about it."], ["funny", "Merry Christmas! Thank you for being my friend, my secret-keeper and my reason to eat the second mince pie."], ["funny", "Happy Christmas to the person who has seen me at my worst and is still sending me a card. We should do a proper catch-up over a big pot of tea."], ["short", "Merry Christmas, you star. Let's catch up soon."], ["short", "Happy Christmas, with love and a very big hug."]]}, {"id": "neighbour", "title": "Neighbours", "msgs": [["warm", "Merry Christmas to our lovely neighbours. Thank you for being so kind and friendly this year. Wishing you a warm, happy Christmas and a great start to the new year."], ["warm", "Wishing you a peaceful Christmas. We feel lucky to have such lovely neighbours and look forward to another year of friendly waves over the fence."], ["warm", "Merry Christmas from next door. Thank you for keeping an eye out and for always being so kind. Wishing you everything good for the new year."], ["funny", "Merry Christmas! We promise to put the bins out on the right day if you do not mention the fairy lights, which are staying up until February."], ["funny", "Happy Christmas to the best neighbours on the street. Our festive lights are not a cry for help, just a lot of enthusiasm."], ["short", "Merry Christmas to our lovely neighbours."], ["short", "Happy Christmas from next door. Have a lovely time."]]}, {"id": "colleague", "title": "Colleagues and work friends", "msgs": [["warm", "Merry Christmas! It has been a pleasure working with you this year. Wishing you a restful break and a great start to the new year."], ["warm", "Thank you for all your help and good humour this year. I hope you have a relaxing Christmas and come back refreshed in January."], ["warm", "Wishing you a happy Christmas and a lovely time with the people you love. You have earned a proper break."], ["funny", "Merry Christmas! May your inbox be empty and your out-of-office be switched on by lunchtime."], ["funny", "Happy Christmas! Here's to the team, the tea rota and the person who always finds the last biscuit."], ["short", "Merry Christmas and thank you for a great year."], ["short", "Happy Christmas! Enjoy the break."]]}, {"id": "boss", "title": "Boss or manager", "msgs": [["warm", "Merry Christmas. Thank you for your support and guidance this year, it has made a real difference. I hope you have a restful break and a great new year."], ["warm", "Wishing you a very happy Christmas. Thank you for being approachable and fair this year. It is genuinely appreciated."], ["warm", "With thanks for a good year and best wishes for Christmas and the new year. I hope you get a proper rest."], ["funny", "Merry Christmas! Thank you for your support this year. I hope you also have a break from every meeting that could have been an email."], ["funny", "Happy Christmas. Wishing you a restful holiday and an unusually quiet inbox."], ["short", "Merry Christmas, and thank you for a good year."], ["short", "Happy Christmas and best wishes for the new year."]]}, {"id": "teacher", "title": "Your child's teacher or teaching assistant", "msgs": [["warm", "Merry Christmas and thank you for everything you do. [Child's name] loves coming to school, and that is down to you. Wishing you a restful and happy Christmas."], ["warm", "Thank you for a wonderful term. You have made [Child's name] feel confident and cared for, and we are so grateful. Have a lovely, well-earned break."], ["warm", "Wishing you a very happy Christmas. Thank you for your patience, your kindness and for making learning fun. We hope you get a proper rest."], ["funny", "Merry Christmas! Thank you for putting up with glitter, glue and our child's endless questions. You are a superhero, and you deserve a very long sit down."], ["funny", "Happy Christmas to a teacher who deserves a medal, a nap and a very large cup of tea. Thank you for everything."], ["short", "Merry Christmas and thank you for everything you do."], ["short", "Happy Christmas, with thanks from [Child's name] and family."]]}, {"id": "faraway", "title": "Someone far away or overseas", "msgs": [["warm", "Merry Christmas from all of us. We wish we could be with you, and we are thinking of you every day. Sending lots of love across the miles."], ["warm", "Distance can't change how much you mean to us. We hope your Christmas is full of warmth and people who love you, and that we can see you very soon."], ["warm", "Thinking of you this Christmas and missing you. Wherever you are celebrating, we are sending hugs. Let's plan a proper catch-up in the new year."], ["funny", "Merry Christmas! It is cold and grey here, so we are sure your Christmas is better. Please send photos of the food and we will be very jealous."], ["funny", "Happy Christmas! Please imagine a big hug from us and a slice of Christmas cake wherever you are. We will save you the best bit."], ["short", "Merry Christmas, wishing we were there with you."], ["short", "Happy Christmas and lots of love, near or far."]]}, {"id": "hard", "title": "Someone having a hard time", "msgs": [["warm", "Thinking of you this Christmas. There's no pressure to be cheerful. I just want you to know that I am here whenever you want a chat, a cuppa or nothing at all."], ["warm", "I know this year has been hard. I'm sending you a big hug and a lot of love this Christmas. You are not on your own, and I am always on the end of the phone."], ["warm", "Wishing you a quiet, kind Christmas. I'm thinking about you, and I'd love to see you soon. No need to reply to this; I just wanted you to know."], ["funny", "Sending you a card with no pressure attached. Merry Christmas, and I'll bring biscuits whenever you're ready for a visit."], ["funny", "If Christmas is a lot this year, please know that you can do as little as you like and I'll still think the world of you."], ["short", "Thinking of you this Christmas. With love."], ["short", "Sending love and a big hug this Christmas."]]}];
+var NOTE='Messages are written to be adapted: put in your own memories and names where you can.';
+var rowsEl=document.getElementById('rows'),used={};
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function pool(gid,tone){var g=G.filter(function(x){return x.id===gid})[0];return g.msgs.filter(function(m){return tone==='all'||m[0]===tone}).map(function(m){return m[1]})}
+function pick(gid,tone,avoid){
+ var p=pool(gid,tone),u=used[gid]=used[gid]||[];
+ var fresh=p.filter(function(m){return u.indexOf(m)<0&&m!==avoid});
+ if(!fresh.length){fresh=p.filter(function(m){return m!==avoid});if(!fresh.length)fresh=p;used[gid]=u=[]}
+ var m=fresh[Math.floor(Math.random()*fresh.length)];u.push(m);return m}
+function compose(name,msg){name=name.trim();return (name?'Dear '+name+',\n\n':'')+msg}
+function addRow(name){
+ var r=el('div','row'),grid=el('div','grid');
+ var a=el('div'),b=el('div'),c=el('div');
+ var l1=el('label',null,'Name (optional)'),n=el('input');n.type='text';n.value=name||'';n.placeholder='e.g. Auntie Sue';
+ a.appendChild(l1);a.appendChild(n);
+ var l2=el('label',null,'Who is it for?'),s=el('select');
+ G.forEach(function(g){var o=el('option',null,g.title);o.value=g.id;s.appendChild(o)});
+ b.appendChild(l2);b.appendChild(s);
+ var l3=el('label',null,'Style'),t=el('select');
+ [['all','Any style'],['warm','Warm'],['funny','Funny'],['short','Short']].forEach(function(x){var o=el('option',null,x[1]);o.value=x[0];t.appendChild(o)});
+ c.appendChild(l3);c.appendChild(t);
+ grid.appendChild(a);grid.appendChild(b);grid.appendChild(c);r.appendChild(grid);
+ var ta=el('textarea');ta.setAttribute('aria-label','Message');r.appendChild(ta);
+ var bar=el('div','bar'),re=el('button','alt','Another message'),cp=el('button',null,'Copy'),rm=el('button','x','Remove');
+ re.type=cp.type=rm.type='button';bar.appendChild(re);bar.appendChild(cp);bar.appendChild(rm);r.appendChild(bar);
+ var last='';
+ function gen(){last=pick(s.value,t.value,last);ta.value=compose(n.value,last)}
+ re.onclick=gen;s.onchange=gen;t.onchange=gen;
+ n.oninput=function(){if(last)ta.value=compose(n.value,last)};
+ cp.onclick=function(){ta.select();try{navigator.clipboard.writeText(ta.value)}catch(e){document.execCommand('copy')}cp.textContent='Copied';setTimeout(function(){cp.textContent='Copy'},1200)};
+ rm.onclick=function(){rowsEl.removeChild(r)};
+ r._gen=gen;r._get=function(){return {name:n.value.trim(),text:ta.value}};
+ rowsEl.appendChild(r);gen();return r}
+document.getElementById('add').onclick=function(){addRow('')};
+document.getElementById('fill').onclick=function(){used={};[].forEach.call(rowsEl.children,function(r){r._gen()})};
+document.getElementById('print').onclick=function(){
+ var sh=document.getElementById('sheet');sh.textContent='';sh.appendChild(el('h2',null,'My Christmas card messages'));
+ [].forEach.call(rowsEl.children,function(r,i){var v=r._get(),d=el('div','item');d.appendChild(el('b',null,(i+1)+'. '+(v.name||'Card '+(i+1))));var p=el('div');p.style.whiteSpace='pre-wrap';p.textContent=v.text;d.appendChild(p);sh.appendChild(d)});
+ window.print()};
+document.getElementById('note').textContent=NOTE;
+addRow('');addRow('');addRow('');
+</script>
+</body>
+</html>
