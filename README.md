@@ -4,6 +4,8 @@ Add everyone on your Christmas card list, say who each person is (Mum and Dad, a
 
 **Use it now, no install:** download `index.html` and open it in any browser, or browse all 77 messages by person on the page version at [tchworks.co.uk/free/what-to-write-in-a-christmas-card-2026](https://www.tchworks.co.uk/free/what-to-write-in-a-christmas-card-2026/?utm_source=github&utm_medium=repo&utm_campaign=card-message-repo).
 
+**Free printable A4 PDF:** all 77 messages (Warm / Funny / Short for 11 recipients) in one print-ready file — [Release v1.0.0-free-printable](https://github.com/wilsonryan-hue/christmas-card-message-generator/releases/tag/v1.0.0-free-printable) · [download PDF](https://github.com/wilsonryan-hue/christmas-card-message-generator/releases/download/v1.0.0-free-printable/christmas-card-messages-2026-free.pdf).
+
 ## What is in it
 
 - 11 groups of people, 7 messages each (3 warm, 2 funny, 2 short): 77 messages, all written by TCH Works.
